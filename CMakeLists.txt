@@ -9,12 +9,13 @@ set(CMAKE_CXX_STANDARD 11)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  geometry_msgs
-  mavros
-  mavros_msgs
-  roscpp
-  rospy
-  sensor_msgs
+        geometry_msgs
+        mavros
+        mavros_msgs
+        roscpp
+        rospy
+        sensor_msgs
+        apriltags_ros
 )
 
 ## System dependencies are found with CMake's conventions
@@ -108,10 +109,10 @@ find_package(OpenCV REQUIRED)
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
+   INCLUDE_DIRS include
 #  LIBRARIES kumquad
-#  CATKIN_DEPENDS geometry_msgs mavros mavros_msgs roscpp rospy sensor_msgs
-#  DEPENDS opencv
+   CATKIN_DEPENDS geometry_msgs mavros mavros_msgs roscpp sensor_msgs apriltags_ros
+   DEPENDS OpenCV
 )
 
 ###########
@@ -121,7 +122,7 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+  include
   ${catkin_INCLUDE_DIRS}
 # TODO: Check names of system library include directories (opencv)
   ${opencv_INCLUDE_DIRS}
@@ -141,6 +142,10 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/kumquad_node.cpp)
+add_executable(${PROJECT_NAME}_node
+        src/april_slam_node.cc
+        src/AprilSlam.cc
+        include/${PROJECT_NAME}/AprilSlam.h)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
