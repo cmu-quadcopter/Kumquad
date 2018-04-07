@@ -68,7 +68,9 @@
   <exec_depend>roscpp</exec_depend>
   <exec_depend>rospy</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>
-
+  <exec_depend>bluefox2</exec_depend>
+  <exec_depend>image_proc</exec_depend>
+  <exec_depend>apriltags_ros</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
