@@ -19,7 +19,7 @@ class AprilSlam {
 
   void initialize_callbacks();
 
-  void detection_callback(apriltags_ros::AprilTagDetectionArrayConstPtr &detectionsMsg);
+  void detection_callback(const apriltags_ros::AprilTagDetectionArray &detectionsMsg);
 };
 
 #endif //KUMQUAD_APRILSLAM_H
