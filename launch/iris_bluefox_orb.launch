@@ -1,0 +1,22 @@
+<launch>
+  <include file="$(find bluefox2)/launch/single_node.launch">
+    <arg name="device" value="25000781"/>
+    <arg name="aec" value="false"/>
+    <arg name="agc" default="false"/>
+    <arg name="rate" default="60"/>
+  </include>
+
+  <node pkg="image_proc" type="image_proc" name="rectify" output="screen" ns="mv_25000781"/>
+
+  <!-- <include file="$(find mavros)/launch/px4.launch">
+    <arg name="fcu_url" value="/dev/ttyUSB0:921600"/>
+  </include> -->
+
+  <node pkg="kumquad" type="kumquad_orb_node" name="pose_publisher" output="screen" args="$(find kumquad)/config/ORBvoc.txt $(find kumquad)/config/orb_mv_25000781.yaml">
+    <remap from="/camera/image_raw" to="mv_25000781/image_raw" />
+    <remap from="pose" to="mavros/vision_pose/pose"/>
+  </node>
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="camera_loc" output="screen" args="0 0 0 0 0 0 fcu camera"/>
+  
+</launch>

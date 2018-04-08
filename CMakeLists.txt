@@ -16,6 +16,8 @@ find_package(catkin REQUIRED COMPONENTS
         rospy
         sensor_msgs
         apriltags_ros
+        orb_slam_2_catkin
+        pangolin_catkin
 )
 
 ## System dependencies are found with CMake's conventions
@@ -147,6 +149,9 @@ add_executable(${PROJECT_NAME}_node
         src/AprilSlam.cc
         include/${PROJECT_NAME}/AprilSlam.h)
 
+add_executable(${PROJECT_NAME}_orb_node
+        src/orb_mono.cc)
+
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -159,6 +164,11 @@ add_executable(${PROJECT_NAME}_node
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_node
+  ${catkin_LIBRARIES}
+  ${opencv_LIBRARIES}
+)
+
+target_link_libraries(${PROJECT_NAME}_orb_node
   ${catkin_LIBRARIES}
   ${opencv_LIBRARIES}
 )

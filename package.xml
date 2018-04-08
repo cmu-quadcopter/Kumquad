@@ -74,6 +74,9 @@
   <exec_depend>image_proc</exec_depend>
   <exec_depend>apriltags_ros</exec_depend>
 
+  <depend>orb_slam_2_catkin</depend>
+  <depend>pangolin_catkin</depend>
+
   <!-- The export tag contains other, unspecified, tags -->
   <export>
     <!-- Other tools can request additional information be placed here -->
