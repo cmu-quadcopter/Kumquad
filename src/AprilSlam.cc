@@ -16,14 +16,14 @@ void AprilSlam::initialize_callbacks() {
   pose_pub = nh.advertise<geometry_msgs::PoseStamped>("pose", 10);
 }
 
-void AprilSlam::detection_callback(const apriltags_ros::AprilTagDetectionArray &detectionsMsg) {
+void AprilSlam::detection_callback(const apriltags::AprilTagDetections &detectionsMsg) {
 
   geometry_msgs::PoseStamped quad_pose;
 
-  for (const apriltags_ros::AprilTagDetection &detection : detectionsMsg.detections) {
+  for (const auto &detection : detectionsMsg.detections) {
     if (detection.id == 0) {
       quad_pose.header.stamp = ros::Time::now();
-      quad_pose.pose = detection.pose.pose;
+      quad_pose.pose = detection.pose;
     }
   }
 

@@ -8,38 +8,35 @@
 
   <node pkg="image_proc" type="image_proc" name="rectify" output="screen" ns="mv_25000781"/>
 
-  <node pkg="apriltags_ros" type="apriltag_detector_node" name="apriltag_detector" output="screen" ns="mv_25000781">
-    <!-- Remap topic required by the node to custom topics -->
-    <remap from="image_rect" to="image_rect" />
-    <remap from="camera_info" to="camera_info" />
+  <node pkg="apriltags" type="apriltags" name="apriltags" output="screen">
+    <param name="~default_tag_size" value="0.037" />
 
-    <!-- Optional: Subscribe to the compressed stream-->
-    <param name="image_transport" type="str" value="compressed" />
+    <param name="~viewer" value="false" />
+    <param name="~publish_detections_image" value="false" />
 
-    <!-- Select the tag family: 16h5, 25h7, 25h9, 36h9, or 36h11(default) -->
-    <param name="tag_family" type="str" value="36h11" />
+    <param name="~display_type" value="CUBE" />
+    <param name="~marker_thickness" value="0.02" />
 
-    <!-- Enable projected optical measurements for more accurate tag transformations -->
-    <!-- This exists for backwards compatability and should be left true for new setups -->
-    <param name="projected_optics" type="bool" value="true" />
+    <!-- <rosparam command="delete" param="tag_data" />
+    <rosparam param="tag_data">
+      "1": 
+        size: 0.035
+      "2":
+        size: 0.048
+    </rosparam> -->
 
-    <!-- Describe the tags -->
-    <rosparam param="tag_descriptions">[
-      {id: 0, size: 0.166},
-      {id: 1, size: 0.166, frame_id: a_frame},
-      {id: 2, size: 0.166, frame_id: tag_2},
-      {id: 3, size: 0.166},
-      {id: 4, size: 0.166},
-      {id: 5, size: 0.166}]
-    </rosparam>
+    <remap from="~image" to="/mv_25000781/image_rect"/>
+    <remap from="~camera_info" to="/mv_25000781/camera_info"/>
+    <remap from="~marker_array" to="/apriltags/marker_array"/>
+    <remap from="~detections" to="/apriltags/detections"/>
   </node>
 
-  <include file="$(find mavros)/launch/px4.launch">
+  <!-- <include file="$(find mavros)/launch/px4.launch">
     <arg name="fcu_url" value="/dev/ttyUSB0:921600"/>
-  </include>
+  </include> -->
 
   <node pkg="kumquad" type="kumquad_node" name="pose_publisher" output="screen">
-    <remap from="detections" to="mv_25000781/tag_detections" />
+    <remap from="detections" to="/apriltags/detections" />
     <remap from="pose" to="mavros/vision_pose/pose"/>
   </node>
 

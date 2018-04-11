@@ -55,14 +55,12 @@
   <build_depend>opencv</build_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>sensor_msgs</build_depend>
-  <build_depend>apriltags_ros</build_depend>
   <build_export_depend>geometry_msgs</build_export_depend>
   <build_export_depend>mavros</build_export_depend>
   <build_export_depend>mavros_msgs</build_export_depend>
   <build_export_depend>opencv</build_export_depend>
   <build_export_depend>roscpp</build_export_depend>
   <build_export_depend>sensor_msgs</build_export_depend>
-  <build_export_depend>apriltags_ros</build_export_depend>
   <exec_depend>geometry_msgs</exec_depend>
   <exec_depend>mavros</exec_depend>
   <exec_depend>mavros_msgs</exec_depend>
@@ -72,7 +70,8 @@
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>bluefox2</exec_depend>
   <exec_depend>image_proc</exec_depend>
-  <exec_depend>apriltags_ros</exec_depend>
+
+  <depend>apriltags</depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

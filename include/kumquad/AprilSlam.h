@@ -6,7 +6,7 @@
 #define KUMQUAD_APRILSLAM_H
 
 #include <ros/ros.h>
-#include <apriltags_ros/AprilTagDetectionArray.h>
+#include <apriltags/AprilTagDetections.h>
 
 class AprilSlam {
  private:
@@ -19,7 +19,7 @@ class AprilSlam {
 
   void initialize_callbacks();
 
-  void detection_callback(const apriltags_ros::AprilTagDetectionArray &detectionsMsg);
+  void detection_callback(const apriltags::AprilTagDetections &detectionsMsg);
 };
 
 #endif //KUMQUAD_APRILSLAM_H
