@@ -4,6 +4,7 @@
 
 #include "kumquad/AprilSlam.h"
 #include <geometry_msgs/PoseStamped.h>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 
 AprilSlam::AprilSlam(ros::NodeHandle &nh) :
     nh(nh) {
@@ -23,9 +24,16 @@ void AprilSlam::detection_callback(const apriltags::AprilTagDetections &detectio
   for (const auto &detection : detectionsMsg.detections) {
     if (detection.id == 0) {
       quad_pose.header.stamp = ros::Time::now();
-      quad_pose.pose = detection.pose;
+      quad_pose.header.frame_id = "camera";
+      tf2::Transform transform;
+      tf2::fromMsg(detection.pose, transform);
+
+      auto inv_transform = transform.inverse();
+
+      tf2::toMsg(inv_transform, quad_pose.pose);
+
+      pose_pub.publish(quad_pose);
     }
   }
 
-  pose_pub.publish(quad_pose);
 }

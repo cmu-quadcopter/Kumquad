@@ -72,6 +72,7 @@
   <exec_depend>image_proc</exec_depend>
 
   <depend>apriltags</depend>
+  <depend>tf2_ros</depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

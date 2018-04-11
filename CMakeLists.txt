@@ -15,6 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
         roscpp
         rospy
         sensor_msgs
+        tf2_ros
         apriltags
 )
 
@@ -111,7 +112,7 @@ find_package(OpenCV 3 REQUIRED)
 catkin_package(
    INCLUDE_DIRS include
 #  LIBRARIES kumquad
-   CATKIN_DEPENDS geometry_msgs mavros mavros_msgs roscpp sensor_msgs apriltags
+   CATKIN_DEPENDS geometry_msgs mavros mavros_msgs roscpp sensor_msgs tf2_ros apriltags
    DEPENDS OpenCV
 )
 
