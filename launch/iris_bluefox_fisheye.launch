@@ -1,0 +1,52 @@
+<launch>
+  <include file="$(find bluefox2)/launch/single_node.launch">
+    <arg name="device" value="25000820"/>
+    <arg name="aec" value="false"/>
+    <arg name="agc" default="false"/>
+    <arg name="rate" default="60"/>
+  </include>
+
+  <node name="image_undistort_node" pkg="image_undistort" type="image_undistort_node">
+    <param name="input_camera_namespace" value="mv_25000820"/>      
+    <param name="input_camera_info_from_ros_params" value = "true"/>    
+    <param name="scale" value="1.0"/>
+    <rosparam file="$(find kumquad)/config/mv_25000820_fisheye.yaml"/>
+    <remap from="input/image" to="/mv_25000820/image_raw"/>
+    <remap from="output/image" to="/output/image_rect"/>
+  </node>
+
+  <node pkg="apriltags" type="apriltags" name="apriltags" output="screen">
+    <param name="~default_tag_size" value="0.164" />
+
+    <param name="~viewer" value="false" />
+    <param name="~publish_detections_image" value="false" />
+
+    <param name="~display_type" value="CUBE" />
+    <param name="~marker_thickness" value="0.02" />
+
+    <!-- <rosparam command="delete" param="tag_data" />
+    <rosparam param="tag_data">
+      "1": 
+        size: 0.035
+      "2":
+        size: 0.048
+    </rosparam> -->
+
+    <remap from="~image" to="/output/image_rect"/>
+    <remap from="~camera_info" to="/output/camera_info"/>
+    <remap from="~marker_array" to="/apriltags/marker_array"/>
+    <remap from="~detections" to="/apriltags/detections"/>
+  </node>
+
+  <!-- <include file="$(find mavros)/launch/px4.launch">
+    <arg name="fcu_url" value="/dev/ttyUSB0:921600"/>
+  </include> -->
+
+  <node pkg="kumquad" type="kumquad_node" name="pose_publisher" output="screen">
+    <remap from="detections" to="/apriltags/detections" />
+    <remap from="pose" to="mavros/vision_pose/pose"/>
+  </node>
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="camera_loc" output="screen" args="0 0 0 0 0 0 fcu camera"/>
+  
+</launch>

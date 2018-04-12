@@ -1,0 +1,6 @@
+mv_25000820:
+  distortion_coeffs: [-0.025482, 0.00387433, -0.00423097, 0.000830255]
+  distortion_model: equidistant
+  intrinsics: [308.495, 308.639, 367.503, 228.237]
+  resolution: [752, 480]
+rostopic: /mv_25000820/image_raw

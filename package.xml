@@ -70,6 +70,7 @@
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>bluefox2</exec_depend>
   <exec_depend>image_proc</exec_depend>
+  <exec_depend>image_undistort</exec_depend>
 
   <depend>apriltags</depend>
   <depend>tf2_ros</depend>
