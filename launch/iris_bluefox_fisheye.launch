@@ -38,15 +38,15 @@
     <remap from="~detections" to="/apriltags/detections"/>
   </node>
 
-  <!-- <include file="$(find mavros)/launch/px4.launch">
+  <include file="$(find kumquad)/launch/px4.launch">
     <arg name="fcu_url" value="/dev/ttyUSB0:921600"/>
-  </include> -->
+  </include>
 
   <node pkg="kumquad" type="kumquad_node" name="pose_publisher" output="screen">
     <remap from="detections" to="/apriltags/detections" />
     <remap from="pose" to="mavros/vision_pose/pose"/>
   </node>
 
-  <node pkg="tf2_ros" type="static_transform_publisher" name="camera_loc" output="screen" args="0 0 0 0 0 0 fcu camera"/>
+  <node pkg="tf2_ros" type="static_transform_publisher" name="camera_loc" output="screen" args="0.04 0.14 0 0 0 0 fcu camera"/>
   
 </launch>
