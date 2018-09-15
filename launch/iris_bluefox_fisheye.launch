@@ -1,5 +1,7 @@
 <launch>
-  <include file="$(find bluefox2)/launch/single_node.launch">
+  <arg name="live" default="true"/>
+
+  <include file="$(find bluefox2)/launch/single_node.launch" if="$(arg live)">
     <arg name="device" value="25000820"/>
     <arg name="aec" value="false"/>
     <arg name="agc" default="false"/>
@@ -38,7 +40,7 @@
     <remap from="~detections" to="/apriltags/detections"/>
   </node>
 
-  <include file="$(find kumquad)/launch/px4.launch">
+  <include file="$(find kumquad)/launch/px4.launch" if="$(arg live)">
     <arg name="fcu_url" value="/dev/ttyUSB0:921600"/>
   </include>
 
