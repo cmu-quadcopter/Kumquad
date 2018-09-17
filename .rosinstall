@@ -6,16 +6,16 @@
     uri: https://github.com/KumarRobotics/camera_base.git
 - git:
     local-name: bluefox2
-    uri: https://github.com/KumarRobotics/bluefox2.git}
+    uri: https://github.com/KumarRobotics/bluefox2.git
 - git:
     local-name: apriltags
-    uri: https://github.com/cmu-quadcopter/apriltags.git}
+    uri: https://github.com/cmu-quadcopter/apriltags.git
 - git:
     local-name: apriltags-cpp
-    uri: https://github.com/cmu-quadcopter/apriltags-cpp.git}
+    uri: https://github.com/cmu-quadcopter/apriltags-cpp.git
 - git:
     local-name: nlopt
-    uri: https://github.com/ethz-asl/nlopt.git}
+    uri: https://github.com/ethz-asl/nlopt.git
 - git:
     local-name: image_undistort
-    uri: https://github.com/ethz-asl/image_undistort.git}
+    uri: https://github.com/ethz-asl/image_undistort.git
